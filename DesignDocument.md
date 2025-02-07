@@ -7,7 +7,56 @@ This document is meant to provide a tool for you to demonstrate the design proce
 ## (INITIAL DESIGN): Class Diagram
 
 Place your class diagram below. Make sure you check the fil in the browser on github.com to make sure it is rendering correctly. If it is not, you will need to fix it. As a reminder, here is a link to tools that can help you create a class diagram: [Class Resources: Class Design Tools](https://github.com/CS5004-khoury-lionelle/Resources?tab=readme-ov-file#uml-design-tools)
+```mermaid
+classDiagram
+    IEmployee <|.. HourlyEmployee
+    IEmployee <|.. SalaryEmployee
+    ITimeCard <|.. TimeCard
+    IPayStub <|.. PayStub
 
+    class IEmployee {
+        <<interface>>
+    }
+    class HourlyEmployee {
+        -name: String
+        -id: String
+        -payRate: double
+        -ytdEarnings: double
+        -ytdTaxesPaid: double
+        -deductions: double
+    }
+    class SalaryEmployee {
+        -name: String
+        -id: String
+        -payRate: double
+        -ytdEarnings: double
+        -ytdTaxesPaid: double
+        -deductions: double
+    }
+    class ITimeCard {
+        <<interface>>
+    }
+    class TimeCard {
+        -employeeId: String
+        -hoursWorked: int
+    }
+    class IPayStub {
+        <<interface>>
+    }
+    class PayStub {
+        -employeeName: String
+        -grossPay: double
+        -netPay: double
+        -taxWithheld: double
+    }
+    class FileUtil {
+        +String EMPLOYEE_HEADER
+        +String PAY_STUB_HEADER
+    }
+
+    class Builder {
+    }
+```
 
 
 
@@ -29,6 +78,17 @@ You should feel free to number your brainstorm.
 1. Test that the `Employee` class properly returns `name` from `getName()`
 2. Test that the `Employee` class properly returns `id` from `getId()`
 3. continue to add your brainstorm here (you don't need to super formal - this is a brainstorm) - yes, you can change the bullets above to something that fits your design.
+4. Test that the `Employee` class properly returns `rate` from `getPayRate()`
+5. Test that the `Employee` class properly returns `employee type` from `getEmployeeType()`
+6. Test that the `Employee` class properly returns `YTDEarnings` from `getYTDEarnings()`
+7. Test that the `Employee` class properly returns `YTDTaxesPaid` from `getYTDTaxesPaid()`
+8. Test that the `Employee` class properly returns `PretaxDeductions` from `getPretaxDeductions()`
+9. Test that the `Employee` class properly returns `Payroll` from `runPayroll(double hoursWorked)`
+10. Test that the `PayStub` class properly returns `payment` from `getPay()`
+11. Test that the `PayStub` class properly returns `tax paid` from `getTaxesPaid()`
+12. Test that the `PayStub` class properly returns `HoursWorked` from `getHoursWorked()`
+13. Test that the `Timecard` class properly returns `EmployeeID` from `getEmployeeID()`
+
 
 
 
