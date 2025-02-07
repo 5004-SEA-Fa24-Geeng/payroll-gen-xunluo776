@@ -1,12 +1,23 @@
 package student;
 
-public class PayStub implements IPayStub{
+/**
+ * a class representing pays tub
+ */
+public class PayStub implements IPayStub {
     private String name;
     private double netPay;
     private double taxesPaid;
     private double ytdEarnings;
     private double ytdTaxesPaid;
 
+    /**
+     * constructor of Paystub.
+     * @param name name of the employee
+     * @param netPay net pay of of the employee
+     * @param taxesPaid taxes paid of the employee
+     * @param ytdEarnings year to date earnings of the employee
+     * @param ytdTaxesPaid year to date tax of the employee
+     */
     public PayStub(String name, double netPay, double taxesPaid, double ytdEarnings, double ytdTaxesPaid) {
         this.name = name;
         this.netPay = netPay;
@@ -15,16 +26,28 @@ public class PayStub implements IPayStub{
         this.ytdTaxesPaid = ytdTaxesPaid;
     }
 
+    /**
+     * get the net pay.
+     * @return netpay in double
+     */
     @Override
-    public double getPay(){
+    public double getPay() {
         return netPay;
     }
 
+    /**
+     * get taxes paid.
+     * @return taxes Paid in double
+     */
     @Override
     public double getTaxesPaid() {
         return taxesPaid;
     }
 
+    /**
+     * get csv string .
+     * @return CSV format in String
+     */
     @Override
     public String toCSV() {
         return String.format("%s,%.2f,%.2f,%.2f,%.2f", name, netPay, taxesPaid, ytdEarnings, ytdTaxesPaid);

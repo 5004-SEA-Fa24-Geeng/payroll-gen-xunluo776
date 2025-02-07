@@ -25,7 +25,7 @@ public class SalaryEmployee extends Employee {
         double taxableIncome = totalPayment - pretaxDeductions;
         double tax = taxableIncome * taxRate;
         double netPay = taxableIncome - tax;
-        this.YTDEarnings += totalPayment;
+        this.YTDEarnings += netPay;
         this.YTDTaxesPaid += tax;
         return new PayStub(name, netPay, tax, YTDEarnings, YTDTaxesPaid);
 
