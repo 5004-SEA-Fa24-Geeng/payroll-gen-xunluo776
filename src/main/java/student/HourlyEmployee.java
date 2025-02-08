@@ -7,12 +7,9 @@ import java.math.RoundingMode;
  * a class to represent hourly employee.
  */
 public class HourlyEmployee extends Employee {
+
     /**
-     * work hours
-     */
-    private final int WORKHOURS = 40;
-    /**
-     * tax rate
+     * tax rate.
      */
     private final double taxRate = 0.2265;
 
@@ -48,9 +45,9 @@ public class HourlyEmployee extends Employee {
             return null;
         }
         double grossPay;
-        if (hoursWorked > WORKHOURS) {
-            double overtime = hoursWorked - WORKHOURS;
-            grossPay = (WORKHOURS * payRate) + (overtime * payRate * 1.5);
+        if (hoursWorked > 40) {
+            double overtime = hoursWorked - 40;
+            grossPay = (40 * payRate) + (overtime * payRate * 1.5);
         } else {
             grossPay = hoursWorked * payRate;
         }

@@ -1,7 +1,13 @@
 package student;
 
 public class TimeCard implements ITimeCard {
+    /**
+     * employee Id
+     */
     private final String employeeId;
+    /**
+     * hour worked
+     */
     private final double hourWorked;
 
     /**
@@ -16,7 +22,7 @@ public class TimeCard implements ITimeCard {
     }
 
     /**
-     * return employee ID
+     * return employee ID.
      *
      * @return EmployeeID as a String
      */
@@ -26,7 +32,7 @@ public class TimeCard implements ITimeCard {
     }
 
     /**
-     * return hour worked
+     * return hour worked.
      *
      * @return hourWorked as a double
      */

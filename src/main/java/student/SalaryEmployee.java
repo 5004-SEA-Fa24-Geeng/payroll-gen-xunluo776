@@ -7,10 +7,15 @@ import java.math.RoundingMode;
  * a class to represent salary employee.
  */
 public class SalaryEmployee extends Employee {
-    private final static int MONTHS = 24;
-    private final static double taxRate = 0.2265;
+    /**
+     * tax rate
+     */
+    private final double TAXRATE = 0.2265;
 
-    public SalaryEmployee(String name, String ID, double payRate, double YTDEarnings, double YTDTaxesPaid, double pretaxDeductions) {
+    public SalaryEmployee(
+            String name, String ID, double payRate, double YTDEarnings
+            , double YTDTaxesPaid, double pretaxDeductions
+    ) {
         super(name, ID, payRate, YTDEarnings, YTDTaxesPaid, pretaxDeductions);
         employeeType = "SALARY";
     }
@@ -34,7 +39,7 @@ public class SalaryEmployee extends Employee {
         double deductions = getPretaxDeductions();
         BigDecimal netPay = bdGross.subtract(new BigDecimal(deductions));
 
-        BigDecimal taxes = netPay.multiply(new BigDecimal(taxRate));
+        BigDecimal taxes = netPay.multiply(new BigDecimal(TAXRATE));
         netPay = netPay.subtract(taxes);
 
         ytdEarnings = ytdEarnings.add(netPay).setScale(2, RoundingMode.HALF_UP);
@@ -44,7 +49,7 @@ public class SalaryEmployee extends Employee {
     }
 
     public double calculateGrossPay(double hoursWorked) {
-        return getPayRate() / MONTHS;
+        return getPayRate() / 24;
     }
 }
 

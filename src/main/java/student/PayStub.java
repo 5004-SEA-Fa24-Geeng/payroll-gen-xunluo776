@@ -7,10 +7,25 @@ import java.math.RoundingMode;
  * a class representing pays tub
  */
 public class PayStub implements IPayStub {
+    /**
+     * name.
+     */
     private String name;
+    /**
+     * netpay.
+     */
     private double netPay;
+    /**
+     * tax.
+     */
     private double taxesPaid;
+    /**
+     * year to date earning.
+     */
     private double ytdEarnings;
+    /**
+     * year to date tax.
+     */
     private double ytdTaxesPaid;
 
     /**
@@ -84,3 +99,4 @@ public class PayStub implements IPayStub {
 
 
 }
+

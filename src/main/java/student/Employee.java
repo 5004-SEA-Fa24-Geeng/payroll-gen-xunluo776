@@ -7,31 +7,31 @@ import java.math.BigDecimal;
  */
 public abstract class Employee implements IEmployee {
     /**
-     * name
+     * name.
      */
     protected String name;
     /**
-     * ID
+     * ID.
      */
     protected String iD;
     /**
-     * pay rate
+     * pay rate.
      */
     protected double payRate;
     /**
-     * deduction
+     * deduction.
      */
     protected double pretaxDeductions;
     /**
-     * type
+     * type.
      */
     protected String employeeType;
     /**
-     * earning
+     * earning.
      */
     protected BigDecimal ytdEarnings;
     /**
-     * tax
+     * tax.
      */
     protected BigDecimal ytdTaxesPaid;
 
@@ -40,18 +40,21 @@ public abstract class Employee implements IEmployee {
      * constructor of the Employee class.
      *
      * @param name             name of the employee
-     * @param ID               ID of the employee
+     * @param iD               ID of the employee
      * @param payRate          pay rate of the employee
-     * @param YTDEarnings      year earning of the employee
-     * @param YTDTaxesPaid     year tax paid of the employee
+     * @param ytdEarnings      year earning of the employee
+     * @param ytdTaxesPaid     year tax paid of the employee
      * @param pretaxDeductions pre-tax deduction of the employee
      */
-    public Employee(String name, String ID, double payRate, double YTDEarnings, double YTDTaxesPaid, double pretaxDeductions) {
+    public Employee(
+            String name, String iD, double payRate,
+            double ytdEarnings, double ytdTaxesPaid, double pretaxDeductions
+    ) {
         this.name = name;
-        this.iD = ID;
+        this.iD = iD;
         this.payRate = payRate;
-        this.ytdEarnings = new BigDecimal(YTDEarnings);
-        this.ytdTaxesPaid = new BigDecimal(YTDTaxesPaid);
+        this.ytdEarnings = new BigDecimal(ytdEarnings);
+        this.ytdTaxesPaid = new BigDecimal(ytdTaxesPaid);
         this.pretaxDeductions = pretaxDeductions;
     }
 
