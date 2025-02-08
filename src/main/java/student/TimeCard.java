@@ -6,16 +6,18 @@ public class TimeCard implements ITimeCard {
 
     /**
      * constructor for the TimeCard class.
+     *
      * @param employeeId ID of the employee
      * @param hourWorked hour worked of employee
      */
-    public TimeCard(String employeeId, double hourWorked){
+    public TimeCard(String employeeId, double hourWorked) {
         this.employeeId = employeeId;
         this.hourWorked = hourWorked;
     }
 
     /**
      * return employee ID
+     *
      * @return EmployeeID as a String
      */
     @Override
@@ -25,6 +27,7 @@ public class TimeCard implements ITimeCard {
 
     /**
      * return hour worked
+     *
      * @return hourWorked as a double
      */
     @Override

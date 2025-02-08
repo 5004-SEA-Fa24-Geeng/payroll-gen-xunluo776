@@ -10,15 +10,17 @@ class TimeCardTest {
 
     @BeforeEach
     void setUp() {
-        t = new TimeCard("s192",45.0);
+        t = new TimeCard("s192", 45.0);
 
     }
+
     @Test
-    void testGetEmployeeID(){
+    void testGetEmployeeID() {
         assertEquals("s192", t.getEmployeeID());
     }
+
     @Test
-    void testGetHoursWorked(){
+    void testGetHoursWorked() {
         assertEquals(45.0, t.getHoursWorked());
     }
 }

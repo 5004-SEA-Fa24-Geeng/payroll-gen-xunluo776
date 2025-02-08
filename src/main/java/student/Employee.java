@@ -1,5 +1,7 @@
 package student;
 
+import java.math.BigDecimal;
+
 /**
  * a abstract class to represent employee.
  */
@@ -7,10 +9,10 @@ public abstract class Employee implements IEmployee {
     protected String name;
     protected String ID;
     protected double payRate;
-    protected double YTDEarnings;
-    protected double YTDTaxesPaid;
     protected double pretaxDeductions;
     protected String employeeType;
+    protected BigDecimal YTDEarnings;
+    protected BigDecimal YTDTaxesPaid;
 
 
     /**
@@ -27,8 +29,8 @@ public abstract class Employee implements IEmployee {
         this.name = name;
         this.ID = ID;
         this.payRate = payRate;
-        this.YTDEarnings = YTDEarnings;
-        this.YTDTaxesPaid = YTDTaxesPaid;
+        this.YTDEarnings = new BigDecimal(YTDEarnings);
+        this.YTDTaxesPaid = new BigDecimal(YTDTaxesPaid);
         this.pretaxDeductions = pretaxDeductions;
     }
 
@@ -69,7 +71,7 @@ public abstract class Employee implements IEmployee {
      */
     @Override
     public double getYTDEarnings() {
-        return YTDEarnings;
+        return YTDEarnings.doubleValue();
     }
 
     /**
@@ -79,7 +81,7 @@ public abstract class Employee implements IEmployee {
      */
     @Override
     public double getYTDTaxesPaid() {
-        return YTDTaxesPaid;
+        return YTDTaxesPaid.doubleValue();
     }
 
     /**

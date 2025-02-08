@@ -1,18 +1,23 @@
 package student;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  * a class to represent salary employee.
  */
 public class SalaryEmployee extends Employee {
     private final static int MONTHS = 24;
     private final static double taxRate = 0.2265;
+
     public SalaryEmployee(String name, String ID, double payRate, double YTDEarnings, double YTDTaxesPaid, double pretaxDeductions) {
-        super(name, ID,payRate,YTDEarnings, YTDTaxesPaid,pretaxDeductions);
+        super(name, ID, payRate, YTDEarnings, YTDTaxesPaid, pretaxDeductions);
         employeeType = "SALARY";
     }
 
     /**
      * run the payroll.
+     *
      * @param hoursWorked the hours worked for the pay period
      * @return a payroll object
      */
@@ -21,14 +26,25 @@ public class SalaryEmployee extends Employee {
         if (hoursWorked < 0) {
             return null;
         }
-        double totalPayment = payRate / MONTHS;
-        double taxableIncome = totalPayment - pretaxDeductions;
-        double tax = taxableIncome * taxRate;
-        double netPay = taxableIncome - tax;
-        this.YTDEarnings += netPay;
-        this.YTDTaxesPaid += tax;
-        return new PayStub(name, netPay, tax, YTDEarnings, YTDTaxesPaid);
 
+        double grossPay = calculateGrossPay(hoursWorked);
+
+        BigDecimal bdGross = new BigDecimal(grossPay).setScale(2, RoundingMode.HALF_UP);
+
+        double deductions = getPretaxDeductions();
+        BigDecimal netPay = bdGross.subtract(new BigDecimal(deductions));
+
+        BigDecimal taxes = netPay.multiply(new BigDecimal(taxRate));
+        netPay = netPay.subtract(taxes);
+
+        YTDEarnings = YTDEarnings.add(netPay).setScale(2, RoundingMode.HALF_UP);
+        YTDTaxesPaid = YTDTaxesPaid.add(taxes).setScale(2, RoundingMode.HALF_UP);
+
+        return new PayStub(name, netPay.doubleValue(), taxes.doubleValue(), YTDEarnings.doubleValue(), YTDTaxesPaid.doubleValue());
+    }
+
+    public double calculateGrossPay(double hoursWorked) {
+        return getPayRate() / MONTHS;
     }
 }
 

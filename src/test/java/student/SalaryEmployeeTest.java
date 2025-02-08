@@ -8,22 +8,60 @@ import static org.junit.jupiter.api.Assertions.*;
 class SalaryEmployeeTest {
     SalaryEmployee a1;
     double hoursWorked;
+
     @BeforeEach
     void setUp() {
-        a1 = new SalaryEmployee("Nami","s193",200000, 17017,4983,1000);
-        hoursWorked = 50;
+        a1 = new SalaryEmployee("Nami", "s193", 200000, 17017, 4983, 1000);
+        hoursWorked = 60;
     }
+
+    @Test
+    void getName() {
+        assertEquals("Nami", a1.getName());
+    }
+
+    @Test
+    void getID() {
+        assertEquals("s193", a1.getID());
+    }
+
+    @Test
+    void getPayRate() {
+        assertEquals(200000, a1.getPayRate());
+    }
+
+    @Test
+    void getYTDEarnings() {
+        assertEquals(17017, a1.getYTDEarnings());
+    }
+
+    @Test
+    void getYTDTaxesPaid() {
+        assertEquals(4983, a1.getYTDTaxesPaid());
+    }
+
+    @Test
+    void getPretaxDeductions() {
+        assertEquals(1000, a1.getPretaxDeductions());
+    }
+
+    @Test
+    void getEmployeeType() {
+        assertEquals("SALARY", a1.getEmployeeType());
+    }
+
     @Test
     void runPayroll() {
-        IPayStub payStub = a1.runPayroll(hoursWorked);
-        double eGrossPay = 200000 / 24.0;
-        double eTaxableIncome = eGrossPay - 1000;
-        double eTax = eTaxableIncome * 0.2265;
-        double eNetPay = eTaxableIncome - eTax;
-        PayStub ePayStub = new PayStub("Nami", eNetPay, eTax, 17017 + eGrossPay, 4983 + eTax);
-        assertEquals(ePayStub.getPay(), payStub.getPay());
-        assertEquals(ePayStub.getTaxesPaid(), payStub.getTaxesPaid());
+        PayStub payStub = (PayStub) a1.runPayroll(hoursWorked);
+        assertEquals(5672.33, payStub.getPay(), 0.01);
+        assertEquals(1661.00, payStub.getTaxesPaid(), 0.01);
+        assertEquals(22689.33, payStub.getYtdEarnings(), 0.01);
 
+    }
+
+    @Test
+    void toCSV() {
+        assertEquals("SALARY,Nami,s193,200000.00,1000.00,17017.00,4983.00", a1.toCSV());
     }
 
 }

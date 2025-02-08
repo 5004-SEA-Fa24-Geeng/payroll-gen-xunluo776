@@ -1,17 +1,19 @@
 /*
  * Students, build off this class. We are providing one sample test case as file reading is new to
  * you.
- * 
+ *
  * NOTE: you may end up changing this completely depending on how you setup your project.
- * 
+ *
  * we are just using .main() as we know that is an entry point that we specified.
- * 
+ *
  */
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import student.PayrollGenerator;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,16 +35,14 @@ public class TestPayrollGenerator {
         Path payStubs = tempDir.resolve("paystubs.csv");
 
 
-
         String[] args = {"-e", employees.toString(), "-t", "resources/time_cards.csv", // allowed,
-                                                                                       // this isn't
-                                                                                       // modified -
-                                                                                       // so safe
+                // this isn't
+                // modified -
+                // so safe
                 "-o", payStubs.toString()};
 
         // run main method
         PayrollGenerator.main(args);
-
 
 
         String expectedPayStubs = Files

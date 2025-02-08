@@ -10,17 +10,17 @@ class PayStubTest {
 
     @BeforeEach
     void setUp() {
-        p = new PayStub("Luffy",1102.24,322.76,21102.24,4852.76);
+        p = new PayStub("Luffy", 1102.24, 322.76, 21102.24, 4852.76);
     }
 
     @Test
     void getPay() {
-        assertEquals(1102.24,p.getPay());
+        assertEquals(1102.24, p.getPay());
     }
 
     @Test
     void getTaxesPaid() {
-        assertEquals(322.76,p.getTaxesPaid());
+        assertEquals(322.76, p.getTaxesPaid());
     }
 
     @Test
