@@ -49,7 +49,7 @@ public class HourlyEmployee extends Employee {
             double overtime = hoursWorked - 40;
             grossPay = (40 * this.getPayRate()) + (overtime * this.getPayRate() * 1.5);
         } else {
-            grossPay = hoursWorked *this.getPayRate();
+            grossPay = hoursWorked * this.getPayRate();
         }
         BigDecimal bdGross = new BigDecimal(grossPay).setScale(2, RoundingMode.HALF_UP);
         BigDecimal netPay = bdGross.subtract(new BigDecimal(this.getPretaxDeductions()));

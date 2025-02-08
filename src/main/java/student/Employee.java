@@ -59,7 +59,7 @@ public abstract class Employee implements IEmployee {
     }
 
     /**
-     * set employee type
+     * set employee type.
      * @param employeeType employee type
      */
 
@@ -68,7 +68,7 @@ public abstract class Employee implements IEmployee {
     }
 
     /**
-     * set YtdEarnings
+     * set YtdEarnings.
      * @param ytdEarnings YtdEarnings
      */
 
@@ -77,7 +77,7 @@ public abstract class Employee implements IEmployee {
     }
 
     /**
-     * set YtdTaxesPaid
+     * set YtdTaxesPaid.
      * @param ytdTaxesPaid YtdTaxesPaid
      */
 
