@@ -37,10 +37,10 @@ public class SalaryEmployee extends Employee {
         BigDecimal taxes = netPay.multiply(new BigDecimal(taxRate));
         netPay = netPay.subtract(taxes);
 
-        YTDEarnings = YTDEarnings.add(netPay).setScale(2, RoundingMode.HALF_UP);
-        YTDTaxesPaid = YTDTaxesPaid.add(taxes).setScale(2, RoundingMode.HALF_UP);
+        ytdEarnings = ytdEarnings.add(netPay).setScale(2, RoundingMode.HALF_UP);
+        ytdTaxesPaid = ytdTaxesPaid.add(taxes).setScale(2, RoundingMode.HALF_UP);
 
-        return new PayStub(name, netPay.doubleValue(), taxes.doubleValue(), YTDEarnings.doubleValue(), YTDTaxesPaid.doubleValue());
+        return new PayStub(name, netPay.doubleValue(), taxes.doubleValue(), ytdEarnings.doubleValue(), ytdTaxesPaid.doubleValue());
     }
 
     public double calculateGrossPay(double hoursWorked) {

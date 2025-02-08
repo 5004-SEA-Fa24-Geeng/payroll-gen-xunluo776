@@ -7,21 +7,31 @@ import java.math.RoundingMode;
  * a class to represent hourly employee.
  */
 public class HourlyEmployee extends Employee {
-    private final static int WORKHOURS = 40;
-    private final static double taxRate = 0.2265;
+    /**
+     * work hours
+     */
+    private final int WORKHOURS = 40;
+    /**
+     * tax rate
+     */
+    private final double taxRate = 0.2265;
 
     /**
-     * constructor of HourlyEmployee
+     * constructor of HourlyEmployee.
      *
      * @param name             name of the employee
      * @param ID               id of the employee
      * @param payRate          pay rate id of the employee
-     * @param YTDEarnings
-     * @param YTDTaxesPaid
+     * @param ytdEarnings
+     * @param ytdTaxesPaid
      * @param pretaxDeductions
      */
-    public HourlyEmployee(String name, String ID, double payRate, double YTDEarnings, double YTDTaxesPaid, double pretaxDeductions) {
-        super(name, ID, payRate, YTDEarnings, YTDTaxesPaid, pretaxDeductions);
+    public HourlyEmployee(
+            String name, String ID, double payRate,
+            double ytdEarnings, double ytdTaxesPaid,
+            double pretaxDeductions
+    ) {
+        super(name, ID, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
         employeeType = "HOURLY";
     }
 
@@ -48,9 +58,12 @@ public class HourlyEmployee extends Employee {
         BigDecimal netPay = bdGross.subtract(new BigDecimal(this.pretaxDeductions));
         BigDecimal taxes = netPay.multiply(new BigDecimal(taxRate));
         netPay = netPay.subtract(taxes);
-        YTDEarnings = YTDEarnings.add(netPay).setScale(2, RoundingMode.HALF_UP);
-        YTDTaxesPaid = YTDTaxesPaid.add(taxes).setScale(2, RoundingMode.HALF_UP);
-        return new PayStub(name, netPay.doubleValue(), taxes.doubleValue(), YTDEarnings.doubleValue(), YTDTaxesPaid.doubleValue());
+        ytdEarnings = ytdEarnings.add(netPay).setScale(2, RoundingMode.HALF_UP);
+        ytdTaxesPaid = ytdTaxesPaid.add(taxes).setScale(2, RoundingMode.HALF_UP);
+        return new PayStub(
+                name, netPay.doubleValue(), taxes.doubleValue(),
+                ytdEarnings.doubleValue(), ytdTaxesPaid.doubleValue()
+        );
 
     }
 }

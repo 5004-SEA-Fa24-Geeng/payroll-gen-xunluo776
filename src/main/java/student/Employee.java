@@ -6,13 +6,34 @@ import java.math.BigDecimal;
  * a abstract class to represent employee.
  */
 public abstract class Employee implements IEmployee {
+    /**
+     * name
+     */
     protected String name;
-    protected String ID;
+    /**
+     * ID
+     */
+    protected String iD;
+    /**
+     * pay rate
+     */
     protected double payRate;
+    /**
+     * deduction
+     */
     protected double pretaxDeductions;
+    /**
+     * type
+     */
     protected String employeeType;
-    protected BigDecimal YTDEarnings;
-    protected BigDecimal YTDTaxesPaid;
+    /**
+     * earning
+     */
+    protected BigDecimal ytdEarnings;
+    /**
+     * tax
+     */
+    protected BigDecimal ytdTaxesPaid;
 
 
     /**
@@ -27,10 +48,10 @@ public abstract class Employee implements IEmployee {
      */
     public Employee(String name, String ID, double payRate, double YTDEarnings, double YTDTaxesPaid, double pretaxDeductions) {
         this.name = name;
-        this.ID = ID;
+        this.iD = ID;
         this.payRate = payRate;
-        this.YTDEarnings = new BigDecimal(YTDEarnings);
-        this.YTDTaxesPaid = new BigDecimal(YTDTaxesPaid);
+        this.ytdEarnings = new BigDecimal(YTDEarnings);
+        this.ytdTaxesPaid = new BigDecimal(YTDTaxesPaid);
         this.pretaxDeductions = pretaxDeductions;
     }
 
@@ -51,7 +72,7 @@ public abstract class Employee implements IEmployee {
      */
     @Override
     public String getID() {
-        return ID;
+        return iD;
     }
 
     /**
@@ -71,7 +92,7 @@ public abstract class Employee implements IEmployee {
      */
     @Override
     public double getYTDEarnings() {
-        return YTDEarnings.doubleValue();
+        return ytdEarnings.doubleValue();
     }
 
     /**
@@ -81,7 +102,7 @@ public abstract class Employee implements IEmployee {
      */
     @Override
     public double getYTDTaxesPaid() {
-        return YTDTaxesPaid.doubleValue();
+        return ytdTaxesPaid.doubleValue();
     }
 
     /**
@@ -151,7 +172,11 @@ public abstract class Employee implements IEmployee {
      */
     @Override
     public String toCSV() {
-        return String.format("%s,%s,%s,%.2f,%.2f,%.2f,%.2f", employeeType, name, ID, payRate, pretaxDeductions, YTDEarnings, YTDTaxesPaid);
+        return String.format(
+                "%s,%s,%s,%.2f,%.2f,%.2f,%.2f",
+                employeeType, name, iD, payRate,
+                pretaxDeductions, ytdEarnings, ytdTaxesPaid
+        );
     }
 
 }

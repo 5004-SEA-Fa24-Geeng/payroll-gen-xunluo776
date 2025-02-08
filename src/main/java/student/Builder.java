@@ -55,9 +55,9 @@ public final class Builder {
     public static ITimeCard buildTimeCardFromCSV(String csv) {
         String[] data = csv.split(",");
         try {
-            String ID = data[0].trim();
+            String iD = data[0].trim();
             double hourWorked = Double.parseDouble(data[1].trim());
-            return new TimeCard(ID, hourWorked);
+            return new TimeCard(iD, hourWorked);
         } catch (Exception e) {
             System.out.println("Invalid data" + e.getMessage());
         }

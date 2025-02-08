@@ -19,6 +19,14 @@ class PayStubTest {
     }
 
     @Test
+    void testConstructor() {
+        assertEquals(1102.24, p.getPay(), 0.01);
+        assertEquals(322.76, p.getTaxesPaid(), 0.01);
+        assertEquals(21102.24, p.getYtdEarnings(), 0.01);
+        assertEquals(4852.76, p.getYtdTaxesPaid(), 0.01);
+    }
+
+    @Test
     void getTaxesPaid() {
         assertEquals(322.76, p.getTaxesPaid());
     }

@@ -16,6 +16,17 @@ class SalaryEmployeeTest {
     }
 
     @Test
+    void testConstructor() {
+        assertEquals("Nami", a1.getName());
+        assertEquals("s193", a1.getID());
+        assertEquals(200000, a1.getPayRate());
+        assertEquals(17017, a1.getYTDEarnings());
+        assertEquals(4983, a1.getYTDTaxesPaid());
+        assertEquals(1000, a1.getPretaxDeductions());
+        assertEquals("SALARY", a1.getEmployeeType());
+    }
+
+    @Test
     void getName() {
         assertEquals("Nami", a1.getName());
     }

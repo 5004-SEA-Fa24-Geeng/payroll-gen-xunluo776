@@ -15,6 +15,12 @@ class TimeCardTest {
     }
 
     @Test
+    void testConstructor() {
+        assertEquals("s192",t.getEmployeeID());
+        assertEquals(45.0, t.getHoursWorked(), 0.01);
+    }
+
+    @Test
     void testGetEmployeeID() {
         assertEquals("s192", t.getEmployeeID());
     }
