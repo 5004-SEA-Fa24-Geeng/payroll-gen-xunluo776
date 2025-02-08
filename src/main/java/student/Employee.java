@@ -9,31 +9,31 @@ public abstract class Employee implements IEmployee {
     /**
      * name.
      */
-    protected String name;
+    private String name;
     /**
      * ID.
      */
-    protected String iD;
+    private String iD;
     /**
      * pay rate.
      */
-    protected double payRate;
+    private double payRate;
     /**
      * deduction.
      */
-    protected double pretaxDeductions;
+    private double pretaxDeductions;
     /**
      * type.
      */
-    protected String employeeType;
+    private String employeeType;
     /**
      * earning.
      */
-    protected BigDecimal ytdEarnings;
+    private BigDecimal ytdEarnings;
     /**
      * tax.
      */
-    protected BigDecimal ytdTaxesPaid;
+    private BigDecimal ytdTaxesPaid;
 
 
     /**
@@ -56,6 +56,33 @@ public abstract class Employee implements IEmployee {
         this.ytdEarnings = new BigDecimal(ytdEarnings);
         this.ytdTaxesPaid = new BigDecimal(ytdTaxesPaid);
         this.pretaxDeductions = pretaxDeductions;
+    }
+
+    /**
+     * set employee type
+     * @param employeeType employee type
+     */
+
+    public void setEmployeeType(String employeeType) {
+        this.employeeType = employeeType;
+    }
+
+    /**
+     * set YtdEarnings
+     * @param ytdEarnings YtdEarnings
+     */
+
+    public void setYtdEarnings(BigDecimal ytdEarnings) {
+        this.ytdEarnings = ytdEarnings;
+    }
+
+    /**
+     * set YtdTaxesPaid
+     * @param ytdTaxesPaid YtdTaxesPaid
+     */
+
+    public void setYtdTaxesPaid(BigDecimal ytdTaxesPaid) {
+        this.ytdTaxesPaid = ytdTaxesPaid;
     }
 
     /**

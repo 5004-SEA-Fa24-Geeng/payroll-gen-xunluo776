@@ -23,7 +23,7 @@ public class SalaryEmployee extends Employee {
             double yTDTaxesPaid, double pretaxDeductions
     ) {
         super(name, iD, payRate, yTDEarnings, yTDTaxesPaid, pretaxDeductions);
-        employeeType = "SALARY";
+        this.setEmployeeType("SALARY");
     }
 
     /**
@@ -48,14 +48,14 @@ public class SalaryEmployee extends Employee {
         BigDecimal taxes = netPay.multiply(new BigDecimal(0.2265));
         netPay = netPay.subtract(taxes);
 
-        ytdEarnings = ytdEarnings.add(netPay).setScale(2, RoundingMode.HALF_UP);
-        ytdTaxesPaid = ytdTaxesPaid.add(taxes).setScale(2, RoundingMode.HALF_UP);
+        setYtdEarnings(new BigDecimal(getYTDEarnings()).add(netPay).setScale(2, RoundingMode.HALF_UP));
+        setYtdTaxesPaid(new BigDecimal(getYTDTaxesPaid()).add(taxes).setScale(2, RoundingMode.HALF_UP));
 
         return new PayStub(
-                name, netPay.doubleValue(),
+                getName(), netPay.doubleValue(),
                 taxes.doubleValue(),
-                ytdEarnings.doubleValue(),
-                ytdTaxesPaid.doubleValue()
+                getYTDEarnings(),
+                getYTDTaxesPaid()
         );
     }
 

@@ -29,7 +29,7 @@ public class HourlyEmployee extends Employee {
             double pretaxDeductions
     ) {
         super(name, iD, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
-        employeeType = "HOURLY";
+        this.setEmployeeType("HOURLY");
     }
 
     /**
@@ -47,19 +47,19 @@ public class HourlyEmployee extends Employee {
         double grossPay;
         if (hoursWorked > 40) {
             double overtime = hoursWorked - 40;
-            grossPay = (40 * payRate) + (overtime * payRate * 1.5);
+            grossPay = (40 * this.getPayRate()) + (overtime * this.getPayRate() * 1.5);
         } else {
-            grossPay = hoursWorked * payRate;
+            grossPay = hoursWorked *this.getPayRate();
         }
         BigDecimal bdGross = new BigDecimal(grossPay).setScale(2, RoundingMode.HALF_UP);
-        BigDecimal netPay = bdGross.subtract(new BigDecimal(this.pretaxDeductions));
+        BigDecimal netPay = bdGross.subtract(new BigDecimal(this.getPretaxDeductions()));
         BigDecimal taxes = netPay.multiply(new BigDecimal(taxRate));
         netPay = netPay.subtract(taxes);
-        ytdEarnings = ytdEarnings.add(netPay).setScale(2, RoundingMode.HALF_UP);
-        ytdTaxesPaid = ytdTaxesPaid.add(taxes).setScale(2, RoundingMode.HALF_UP);
+        setYtdEarnings(new BigDecimal(getYTDEarnings()).add(netPay).setScale(2, RoundingMode.HALF_UP));
+        setYtdTaxesPaid(new BigDecimal(getYTDTaxesPaid()).add(taxes).setScale(2, RoundingMode.HALF_UP));
         return new PayStub(
-                name, netPay.doubleValue(), taxes.doubleValue(),
-                ytdEarnings.doubleValue(), ytdTaxesPaid.doubleValue()
+                this.getName(), netPay.doubleValue(), taxes.doubleValue(),
+                getYTDEarnings(), getYTDTaxesPaid()
         );
 
     }

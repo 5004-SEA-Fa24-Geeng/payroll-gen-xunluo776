@@ -3,6 +3,8 @@ package student;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SalaryEmployeeTest {
@@ -24,6 +26,23 @@ class SalaryEmployeeTest {
         assertEquals(4983, a1.getYTDTaxesPaid());
         assertEquals(1000, a1.getPretaxDeductions());
         assertEquals("SALARY", a1.getEmployeeType());
+    }
+
+    @Test
+    void setEmployeeType(){
+        a1.setEmployeeType("HOURLY");
+        assertEquals("HOURLY", a1.getEmployeeType());
+    }
+    @Test
+    void setYtdEarnings(){
+        a1.setYtdEarnings(new BigDecimal(0));
+        assertEquals(0, a1.getYTDEarnings());
+    }
+
+    @Test
+    void setYtdTaxesPaid() {
+        a1.setYtdTaxesPaid(new BigDecimal(0));
+        assertEquals(0, a1.getYTDTaxesPaid());
     }
 
     @Test
