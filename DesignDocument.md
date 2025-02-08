@@ -9,53 +9,79 @@ This document is meant to provide a tool for you to demonstrate the design proce
 Place your class diagram below. Make sure you check the fil in the browser on github.com to make sure it is rendering correctly. If it is not, you will need to fix it. As a reminder, here is a link to tools that can help you create a class diagram: [Class Resources: Class Design Tools](https://github.com/CS5004-khoury-lionelle/Resources?tab=readme-ov-file#uml-design-tools)
 ```mermaid
 classDiagram
-    IEmployee <|.. HourlyEmployee
-    IEmployee <|.. SalaryEmployee
-    ITimeCard <|.. TimeCard
-    IPayStub <|.. PayStub
-
-    class IEmployee {
-        <<interface>>
-    }
-    class HourlyEmployee {
-        -name: String
-        -id: String
-        -payRate: double
-        -ytdEarnings: double
-        -ytdTaxesPaid: double
-        -deductions: double
-    }
-    class SalaryEmployee {
-        -name: String
-        -id: String
-        -payRate: double
-        -ytdEarnings: double
-        -ytdTaxesPaid: double
-        -deductions: double
-    }
-    class ITimeCard {
-        <<interface>>
-    }
-    class TimeCard {
-        -employeeId: String
-        -hoursWorked: int
-    }
-    class IPayStub {
-        <<interface>>
-    }
-    class PayStub {
-        -employeeName: String
-        -grossPay: double
-        -netPay: double
-        -taxWithheld: double
-    }
-    class FileUtil {
-        +String EMPLOYEE_HEADER
-        +String PAY_STUB_HEADER
-    }
+    direction BT
 
     class Builder {
+        - Builder()
+        + buildEmployeeFromCSV(String) IEmployee?
+        + buildTimeCardFromCSV(String) ITimeCard?
     }
+
+    class FileUtil {
+        - FileUtil()
+        + writeFile(String, List~String~, boolean) void
+        + writeFile(String, List~String~) void
+        + readFileToList(String) List~String~
+    }
+
+    class HourlyEmployee {
+        + HourlyEmployee(String, String, double, double, double, double)
+        + runPayroll(double) IPayStub
+        + toCSV() String
+    }
+
+    class IEmployee {
+        <<Interface>>
+        + toCSV() String
+        + runPayroll(double) IPayStub
+        # double payRate
+        # String name
+        # String employeeType
+        # double pretaxDeductions
+        # double YTDEarnings
+        # double YTDTaxesPaid
+        # String ID
+    }
+
+    class IPayStub {
+        <<Interface>>
+        + toCSV() String
+        # double taxesPaid
+        # double pay
+    }
+
+    class ITimeCard {
+        <<Interface>>
+        # String employeeID
+        # double hoursWorked
+    }
+
+    class PayStub {
+        + PayStub(String, double, double, double, double)
+        + toCSV() String
+    }
+
+    class PayrollGenerator {
+        - PayrollGenerator()
+        + main(String[]) void
+    }
+
+    class SalaryEmployee {
+        + SalaryEmployee(String, String, double, double, double, double)
+        + runPayroll(double) IPayStub
+        + toCSV() String
+    }
+
+    class TimeCard {
+        + TimeCard(String, double)
+        # String employeeID
+        # double hoursWorked
+    }
+
+    HourlyEmployee  ..>  IEmployee
+    SalaryEmployee  ..>  IEmployee
+    PayStub  ..>  IPayStub
+    TimeCard  ..>  ITimeCard
 ```
 
 
@@ -88,6 +114,8 @@ You should feel free to number your brainstorm.
 11. Test that the `PayStub` class properly returns `tax paid` from `getTaxesPaid()`
 12. Test that the `PayStub` class properly returns `HoursWorked` from `getHoursWorked()`
 13. Test that the `Timecard` class properly returns `EmployeeID` from `getEmployeeID()`
+14. Test that the `Builder` class properly returns `Employee obj` from `buildEmployeeFromCSV(String csv)`
+15. est that the `Builder` class properly returns `TimeCard obj` from `buildTimeCardFromCSV(String csv)`
 
 
 
@@ -98,7 +126,99 @@ Go through your completed code, and update your class diagram to reflect the fin
 
 > [!WARNING]
 > If you resubmit your assignment for manual grading, this is a section that often needs updating. You should double check with every resubmit to make sure it is up to date.
+```mermaid
+classDiagram
+direction BT
+class Builder {
+  - Builder() 
+  + buildEmployeeFromCSV(String) IEmployee?
+  + buildTimeCardFromCSV(String) ITimeCard?
+}
+class Employee {
+  + Employee(String, String, double, double, double, double) 
+  # String ID
+  # BigDecimal YTDEarnings
+  # BigDecimal YTDTaxesPaid
+  # double payRate
+  # double pretaxDeductions
+  # String name
+  # String employeeType
+  + runPayroll(double) IPayStub
+  + toCSV() String
+   double payRate
+   String name
+   String employeeType
+   double pretaxDeductions
+   double YTDEarnings
+   double YTDTaxesPaid
+   String ID
+}
+class FileUtil {
+  - FileUtil() 
+  + writeFile(String, List~String~, boolean) void
+  + writeFile(String, List~String~) void
+  + readFileToList(String) List~String~
+}
+class HourlyEmployee {
+  + HourlyEmployee(String, String, double, double, double, double) 
+  + runPayroll(double) IPayStub
+}
+class IEmployee {
+<<Interface>>
+  + toCSV() String
+  + runPayroll(double) IPayStub
+   double payRate
+   String name
+   String employeeType
+   double pretaxDeductions
+   double YTDEarnings
+   double YTDTaxesPaid
+   String ID
+}
+class IPayStub {
+<<Interface>>
+  + toCSV() String
+   double taxesPaid
+   double pay
+}
+class ITimeCard {
+<<Interface>>
+   String employeeID
+   double hoursWorked
+}
+class PayStub {
+  + PayStub(String, double, double, double, double) 
+  - double ytdTaxesPaid
+  - double taxesPaid
+  - double ytdEarnings
+  + toCSV() String
+   double ytdTaxesPaid
+   double ytdEarnings
+   double taxesPaid
+   double pay
+}
+class PayrollGenerator {
+  - PayrollGenerator() 
+  + main(String[]) void
+}
+class SalaryEmployee {
+  + SalaryEmployee(String, String, double, double, double, double) 
+  + calculateGrossPay(double) double
+  + runPayroll(double) IPayStub
+}
+class TimeCard {
+  + TimeCard(String, double) 
+   String employeeID
+   double hoursWorked
+}
 
+Employee  ..>  IEmployee 
+HourlyEmployee  -->  Employee 
+PayStub  ..>  IPayStub 
+SalaryEmployee  -->  Employee 
+TimeCard  ..>  ITimeCard 
+
+```
 
 
 
@@ -109,3 +229,4 @@ Go through your completed code, and update your class diagram to reflect the fin
 > The value of reflective writing has been highly researched and documented within computer science, from learning new information to showing higher salaries in the workplace. For this next part, we encourage you to take time, and truly focus on your retrospective.
 
 Take time to reflect on how your design has changed. Write in *prose* (i.e. do not bullet point your answers - it matters in how our brain processes the information). Make sure to include what were some major changes, and why you made them. What did you learn from this process? What would you do differently next time? What was the most challenging part of this process? For most students, it will be a paragraph or two. 
+>the biggest thing was realizing how much duplicated code I had in both the SalaryEmployee and HourlyEmployee classes. At first, I had them both implementing the IEmployee interface directly, which means I have to write similar methods like the getters or toCSV over and over again. Then I went to a TA, I learned that I could use an abstract class to store these methods, fields, and constructors. This way, I dont need to write multiple getters and all other things in both hourly and salary employees, this makes my code a lot more clear. I also learned that in an abstract class, I don’t need to define the body of every method. I can just declare methods using the keyword "abstract" if I want subclasses to implement them. The most challenging part was the big decimal part. My original output was off by 0.01, I tried to use string.format but it did not work. I had to go seek for TA's help again.  Next time, I would plan out inheritance and same functionality earlier to avoid rewriting. 

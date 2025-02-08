@@ -51,12 +51,6 @@ public class HourlyEmployee extends Employee {
         YTDEarnings = YTDEarnings.add(netPay).setScale(2, RoundingMode.HALF_UP);
         YTDTaxesPaid = YTDTaxesPaid.add(taxes).setScale(2, RoundingMode.HALF_UP);
         return new PayStub(name, netPay.doubleValue(), taxes.doubleValue(), YTDEarnings.doubleValue(), YTDTaxesPaid.doubleValue());
-//        double taxable = totalPayment - pretaxDeductions;
-//        double tax = taxable * taxRate;
-//        double netPay = taxable - tax;
-//        this.YTDTaxesPaid += tax;
-//        this.YTDEarnings += netPay;
-//        return new PayStub(name, netPay, tax, YTDEarnings, YTDTaxesPaid);
 
     }
 }
