@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /**
- * a class representing pays tub
+ * a class representing pays tub.
  */
 public class PayStub implements IPayStub {
     /**

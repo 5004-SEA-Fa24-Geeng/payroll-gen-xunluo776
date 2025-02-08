@@ -17,18 +17,18 @@ public class HourlyEmployee extends Employee {
      * constructor of HourlyEmployee.
      *
      * @param name             name of the employee
-     * @param ID               id of the employee
+     * @param iD               id of the employee
      * @param payRate          pay rate id of the employee
      * @param ytdEarnings
      * @param ytdTaxesPaid
      * @param pretaxDeductions
      */
     public HourlyEmployee(
-            String name, String ID, double payRate,
+            String name, String iD, double payRate,
             double ytdEarnings, double ytdTaxesPaid,
             double pretaxDeductions
     ) {
-        super(name, ID, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
+        super(name, iD, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
         employeeType = "HOURLY";
     }
 

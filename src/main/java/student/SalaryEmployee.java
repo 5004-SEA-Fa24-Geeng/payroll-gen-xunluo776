@@ -7,16 +7,22 @@ import java.math.RoundingMode;
  * a class to represent salary employee.
  */
 public class SalaryEmployee extends Employee {
-    /**
-     * tax rate
-     */
-    private final double TAXRATE = 0.2265;
 
+    /**
+     * constructor of SalaryEmployee
+     *
+     * @param name             name
+     * @param iD               id
+     * @param payRate          pay rate
+     * @param yTDEarnings      year to date earning
+     * @param yTDTaxesPaid     year to date tax
+     * @param pretaxDeductions pre tax deduction
+     */
     public SalaryEmployee(
-            String name, String ID, double payRate, double YTDEarnings
-            , double YTDTaxesPaid, double pretaxDeductions
+            String name, String iD, double payRate, double yTDEarnings
+            , double yTDTaxesPaid, double pretaxDeductions
     ) {
-        super(name, ID, payRate, YTDEarnings, YTDTaxesPaid, pretaxDeductions);
+        super(name, iD, payRate, yTDEarnings, yTDTaxesPaid, pretaxDeductions);
         employeeType = "SALARY";
     }
 
@@ -39,13 +45,18 @@ public class SalaryEmployee extends Employee {
         double deductions = getPretaxDeductions();
         BigDecimal netPay = bdGross.subtract(new BigDecimal(deductions));
 
-        BigDecimal taxes = netPay.multiply(new BigDecimal(TAXRATE));
+        BigDecimal taxes = netPay.multiply(new BigDecimal(0.2265));
         netPay = netPay.subtract(taxes);
 
         ytdEarnings = ytdEarnings.add(netPay).setScale(2, RoundingMode.HALF_UP);
         ytdTaxesPaid = ytdTaxesPaid.add(taxes).setScale(2, RoundingMode.HALF_UP);
 
-        return new PayStub(name, netPay.doubleValue(), taxes.doubleValue(), ytdEarnings.doubleValue(), ytdTaxesPaid.doubleValue());
+        return new PayStub(
+                name, netPay.doubleValue()
+                , taxes.doubleValue()
+                , ytdEarnings.doubleValue(),
+                ytdTaxesPaid.doubleValue()
+        );
     }
 
     public double calculateGrossPay(double hoursWorked) {
