@@ -11,7 +11,7 @@ public class HourlyEmployee extends Employee {
     /**
      * tax rate.
      */
-    private final double taxRate = 0.2265;
+    private final double TAXRATE = 0.2265;
 
     /**
      * constructor of HourlyEmployee.
@@ -44,16 +44,18 @@ public class HourlyEmployee extends Employee {
         if (hoursWorked < 0) {
             return null;
         }
+        double WORKHOURS = 40;
+        double OVERTIMERATE = 1.5;
         double grossPay;
-        if (hoursWorked > 40) {
-            double overtime = hoursWorked - 40;
-            grossPay = (40 * this.getPayRate()) + (overtime * this.getPayRate() * 1.5);
+        if (hoursWorked > WORKHOURS) {
+            double overtime = hoursWorked - WORKHOURS;
+            grossPay = (WORKHOURS * this.getPayRate()) + (overtime * this.getPayRate() * OVERTIMERATE);
         } else {
             grossPay = hoursWorked * this.getPayRate();
         }
         BigDecimal bdGross = new BigDecimal(grossPay).setScale(2, RoundingMode.HALF_UP);
         BigDecimal netPay = bdGross.subtract(new BigDecimal(this.getPretaxDeductions()));
-        BigDecimal taxes = netPay.multiply(new BigDecimal(taxRate));
+        BigDecimal taxes = netPay.multiply(new BigDecimal(TAXRATE));
         netPay = netPay.subtract(taxes);
         setYtdEarnings(new BigDecimal(getYTDEarnings()).add(netPay).setScale(2, RoundingMode.HALF_UP));
         setYtdTaxesPaid(new BigDecimal(getYTDTaxesPaid()).add(taxes).setScale(2, RoundingMode.HALF_UP));

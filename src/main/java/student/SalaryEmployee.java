@@ -9,6 +9,15 @@ import java.math.RoundingMode;
 public class SalaryEmployee extends Employee {
 
     /**
+     * payment period.
+     */
+    int PAYMENTPERIOD = 24;
+    /**
+     * tax rate.
+     */
+    double TAXRATE = 0.2265;
+
+    /**
      * constructor of SalaryEmployee.
      *
      * @param name             name
@@ -38,14 +47,14 @@ public class SalaryEmployee extends Employee {
             return null;
         }
 
-        double grossPay = getPayRate() / 24;
+        double grossPay = getPayRate() / PAYMENTPERIOD;
 
         BigDecimal bdGross = new BigDecimal(grossPay).setScale(2, RoundingMode.HALF_UP);
 
         double deductions = getPretaxDeductions();
         BigDecimal netPay = bdGross.subtract(new BigDecimal(deductions));
 
-        BigDecimal taxes = netPay.multiply(new BigDecimal(0.2265));
+        BigDecimal taxes = netPay.multiply(new BigDecimal(TAXRATE));
         netPay = netPay.subtract(taxes);
 
         setYtdEarnings(new BigDecimal(getYTDEarnings()).add(netPay).setScale(2, RoundingMode.HALF_UP));
