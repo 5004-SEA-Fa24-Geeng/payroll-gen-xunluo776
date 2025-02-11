@@ -7,16 +7,6 @@ import java.math.RoundingMode;
  * a class to represent salary employee.
  */
 public class SalaryEmployee extends Employee {
-
-    /**
-     * payment period.
-     */
-    int PAYMENTPERIOD = 24;
-    /**
-     * tax rate.
-     */
-    double TAXRATE = 0.2265;
-
     /**
      * constructor of SalaryEmployee.
      *
@@ -46,15 +36,17 @@ public class SalaryEmployee extends Employee {
         if (hoursWorked < 0) {
             return null;
         }
+        int paymentPeriod = 24;
+        double taxRate = 0.2265;
 
-        double grossPay = getPayRate() / PAYMENTPERIOD;
+        double grossPay = getPayRate() / paymentPeriod;
 
         BigDecimal bdGross = new BigDecimal(grossPay).setScale(2, RoundingMode.HALF_UP);
 
         double deductions = getPretaxDeductions();
         BigDecimal netPay = bdGross.subtract(new BigDecimal(deductions));
 
-        BigDecimal taxes = netPay.multiply(new BigDecimal(TAXRATE));
+        BigDecimal taxes = netPay.multiply(new BigDecimal(taxRate));
         netPay = netPay.subtract(taxes);
 
         setYtdEarnings(new BigDecimal(getYTDEarnings()).add(netPay).setScale(2, RoundingMode.HALF_UP));
